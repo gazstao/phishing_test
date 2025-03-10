@@ -21,7 +21,7 @@ Este projeto é um **sistema de conscientização sobre segurança digital**, pr
 
 1️⃣ Clone este repositório:  
 ```bash
-git clone https://github.com/seu-usuario/sistema-phishing.git
+git clone https://github.com/gazstao/phishing_test/
 ```  
 2️⃣ Configure o banco de dados (arquivo `config.php`).  
 3️⃣ Execute o script SQL para criar as tabelas.  
