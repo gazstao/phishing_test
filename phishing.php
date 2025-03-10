@@ -27,15 +27,43 @@ if (isset($_GET['token'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atenção!</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .alert-box {
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 100px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        .alert-box h2 {
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
-    <h2>🚨 Simulação de Phishing 🚨</h2>
-    <p>Este é um teste de conscientização sobre segurança digital.</p>
-    <p>Se você chegou até aqui, significa que clicou em um link suspeito.</p>
+    <div class="container">
+        <div class="alert-box text-center">
+            <h2>🚨 Simulação de Phishing 🚨</h2>
+            <p class="lead mt-3">Este é um teste de conscientização sobre segurança digital.</p>
+            <p>Se você chegou até aqui, significa que clicou em um link suspeito.</p>
+            <hr>
+            <p class="text-muted">Lembre-se de sempre verificar a autenticidade dos links antes de clicar.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (opcional, se precisar de funcionalidades JS do Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

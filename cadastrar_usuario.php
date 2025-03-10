@@ -4,6 +4,8 @@ require 'config.php';
 // Buscar empresas para selecionar no formulário
 $empresas = $pdo->query("SELECT * FROM empresas")->fetchAll(PDO::FETCH_ASSOC);
 
+$mensagem = ''; // Variável para armazenar mensagens de feedback
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $empresa_id = $_POST['empresa_id'];
     $nome = trim($_POST['nome']);
@@ -19,29 +21,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':token', $token);
 
         if ($stmt->execute()) {
-            echo "Usuário cadastrado com sucesso! Token: $token";
+            $mensagem = "<div class='alert alert-success'>Usuário cadastrado com sucesso! Token: $token</div>";
         } else {
-            echo "Erro ao cadastrar usuário.";
+            $mensagem = "<div class='alert alert-danger'>Erro ao cadastrar usuário.</div>";
         }
     } else {
-        echo "Preencha todos os campos.";
+        $mensagem = "<div class='alert alert-warning'>Preencha todos os campos.</div>";
     }
 }
 ?>
 
-<form method="POST">
-    <label>Empresa:</label>
-    <select name="empresa_id" required>
-        <?php foreach ($empresas as $empresa) : ?>
-            <option value="<?= $empresa['id'] ?>"><?= $empresa['nome'] ?></option>
-        <?php endforeach; ?>
-    </select>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Cadastro de Usuários</h1>
 
-    <label>Nome do Usuário:</label>
-    <input type="text" name="nome" required>
+        <?php echo $mensagem; // Exibe a mensagem de feedback ?>
 
-    <label>Email:</label>
-    <input type="email" name="email" required>
+        <form method="POST" class="mb-3">
+            <div class="mb-3">
+                <label for="empresa_id" class="form-label">Empresa:</label>
+                <select class="form-select" id="empresa_id" name="empresa_id" required>
+                    <?php foreach ($empresas as $empresa) : ?>
+                        <option value="<?= $empresa['id'] ?>"><?= $empresa['nome'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-    <button type="submit">Cadastrar</button>
-</form>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome do Usuário:</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (opcional, se precisar de funcionalidades JS do Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
